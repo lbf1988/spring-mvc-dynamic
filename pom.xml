@@ -16,6 +16,9 @@
     <apache.jar.version>3.0.2</apache.jar.version>
     <apache.source.version>3.0.1</apache.source.version>
     <apache.javadoc.version>3.0.0</apache.javadoc.version>
+
+    <javaee-api-version>8.0</javaee-api-version>
+    <springframework-version>5.0.3.RELEASE</springframework-version>
   </properties>
 
   <dependencies>
@@ -26,28 +29,36 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>${javaee-api-version}</version>
+      <scope>provided</scope>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>5.0.3.RELEASE</version>
+      <version>${springframework-version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>5.0.3.RELEASE</version>
+      <version>${springframework-version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>5.0.3.RELEASE</version>
+      <version>${springframework-version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>
-      <version>5.0.3.RELEASE</version>
+      <version>${springframework-version}</version>
     </dependency>
 
   </dependencies>
