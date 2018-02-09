@@ -124,10 +124,10 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${apache.compiler.version}</version>
         <configuration>
-          <source>${project.jdk.version}</source>
-          <target>${project.jdk.version}</target>
-          <encoding>${project.sourceEncoding.version}</encoding>
-          <showWarnings>true</showWarnings>
+            <source>${project.jdk.version}</source>
+            <target>${project.jdk.version}</target>
+            <encoding>${project.sourceEncoding.version}</encoding>
+            <showWarnings>true</showWarnings>
         </configuration>
       </plugin>
       <plugin>
@@ -135,16 +135,20 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>9.4.8.v20171121</version>
         <configuration>
-          <stopKey>STOP</stopKey>
-          <stopPort>9996</stopPort>
-          <stopWait>5</stopWait>
-          <scanIntervalSeconds>5</scanIntervalSeconds>
-          <httpConnector>
-            <port>8080</port>
-          </httpConnector>
-          <webAppConfig>
-            <contextPath>/</contextPath>
-          </webAppConfig>
+            <stopKey>STOP</stopKey>
+            <stopPort>9996</stopPort>
+            <stopWait>5</stopWait>
+            <scanIntervalSeconds>20</scanIntervalSeconds>
+            <httpConnector>
+                <port>8080</port>
+            </httpConnector>
+            <scanTargets>
+                <scanTarget>src/main/java</scanTarget>
+                <scanTarget>src/main/resources</scanTarget>
+            </scanTargets>
+            <webAppConfig>
+                <contextPath>/</contextPath>
+            </webAppConfig>
         </configuration>
       </plugin>
     </plugins>
