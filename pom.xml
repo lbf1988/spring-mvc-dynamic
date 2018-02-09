@@ -138,7 +138,8 @@
             <stopKey>STOP</stopKey>
             <stopPort>9996</stopPort>
             <stopWait>5</stopWait>
-            <scanIntervalSeconds>20</scanIntervalSeconds>
+            <reload>manual</reload>
+            <scanIntervalSeconds>120</scanIntervalSeconds>
             <httpConnector>
                 <port>8080</port>
             </httpConnector>
