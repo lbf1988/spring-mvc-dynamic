@@ -2,6 +2,6 @@
 <body>
 ${msg}
 <br/>
-<a href="/reg">动态注册一个Controller</a>
+<a href="/reg">Dynamic register Bean Controller</a>
 </body>
 </html>

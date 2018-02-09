@@ -1,6 +1,7 @@
 package vip.iten.controller;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.web.context.ContextLoader;
 
 /**
  * UserController
@@ -11,10 +12,12 @@ import org.springframework.beans.factory.InitializingBean;
 public class UserController implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
+
         System.out.println("我是动态注册的你,不是容器启动的时候注册的你");
     }
 
     public String toAction(String content){
+
         return "-->" +  content;
     }
 }
