@@ -28,8 +28,6 @@ public class IndexController {
         // 获取bean工厂并转换为DefaultListableBeanFactory
         DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
 
-        applicationContext.refresh();
-
         // 通过BeanDefinitionBuilder创建bean定义
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(UserController.class);
 
