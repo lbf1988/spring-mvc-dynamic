@@ -14,8 +14,10 @@
     <!--启用自动扫描 -->
     <context:component-scan base-package="vip.iten.controller"/>
 
+
+    <bean class="vip.iten.controller.BeanScanner" scope="singleton" />
     <!-- Spring上下 -->
-    <bean name="springContextUtils" class="vip.iten.controller.SpringContextUtil" scope="singleton" />
+    <bean class="vip.iten.controller.SpringContextUtil" scope="singleton" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/"/>

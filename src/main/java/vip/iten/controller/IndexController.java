@@ -13,6 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import vip.iten.bean.DynamicBean;
 
 import java.lang.reflect.Method;
 
@@ -55,6 +56,12 @@ public class IndexController {
         model.addAttribute("msg", "register OK" + userController.toAction("动态注册生成调用"));
         System.out.println("context url -----> " + ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/"));
         return "index";
+    }
+
+    @RequestMapping(value="scan")
+    public String scan(ModelMap model){
+        BeanScanner.doScanBean("vip.iten.bean");
+        return SpringContextUtil.getBean("dynamicBean", DynamicBean.class).dynamicBind("123",model);
     }
 
     @RequestMapping(value="mapper")
