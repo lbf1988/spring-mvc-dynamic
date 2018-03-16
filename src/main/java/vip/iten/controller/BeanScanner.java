@@ -19,12 +19,12 @@ public class BeanScanner implements BeanDefinitionRegistryPostProcessor{
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         BeanScanner.registry = registry;
     }
-
     public static void doScanBean(String basePackage){
         ClassPathScanner scanner = new ClassPathScanner(BeanScanner.registry);
         scanner.registerFilters();
         scanner.scan(basePackage);
     }
+
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {

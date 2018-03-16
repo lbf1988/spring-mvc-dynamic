@@ -6,13 +6,18 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter;
+import org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vip.iten.bean.DynamicBean;
 
 import java.lang.reflect.Method;
@@ -26,9 +31,9 @@ import java.lang.reflect.Method;
 @Controller
 public class IndexController {
 
-    @SuppressWarnings("SpringJavaAutowiringInspection")
-    @Autowired
-    public RequestMappingHandlerMapping requestMappingHandlerMapping;
+//    @SuppressWarnings("SpringJavaAutowiringInspection")
+//    @Autowired
+//    public RequestMappingHandlerMapping requestMappingHandlerMapping;
 
     @RequestMapping(value="/")
     public String sayHello(ModelMap model){
@@ -61,7 +66,7 @@ public class IndexController {
     @RequestMapping(value="scan")
     public String scan(ModelMap model){
         BeanScanner.doScanBean("vip.iten.bean");
-        return SpringContextUtil.getBean("dynamicBean", DynamicBean.class).dynamicBind("123",model);
+        return SpringContextUtil.getBean(DynamicBean.class).dynamicBind("123",model);
     }
 
     @RequestMapping(value="mapper")
@@ -70,7 +75,7 @@ public class IndexController {
             url = "test";
         }
 
-        RequestMappingInfo requestMappingInfo = RequestMappingHandler.getInstance().register(url);
+        //RequestMappingInfo requestMappingInfo = RequestMappingHandler.getInstance().register(url);
 
         // 将applicationContext转换为ConfigurableApplicationContext
         ConfigurableApplicationContext applicationContext = (ConfigurableApplicationContext) SpringContextUtil.getApplicationContext();
@@ -82,14 +87,16 @@ public class IndexController {
         // 注册bean
         defaultListableBeanFactory.registerBeanDefinition("dynamicController", beanDefinitionBuilder.getRawBeanDefinition());
 
-        Method[] methods = DynamicController.class.getMethods();
-        Method defaultMethod = null;
-        for(Method method : methods){
-            if(method.getName().equalsIgnoreCase("dynamicBind")){
-                defaultMethod = method;
-            }
-        }
-        requestMappingHandlerMapping.registerMapping(requestMappingInfo,"dynamicController",defaultMethod);
+        RequestMappingHandlerHolder.me().registerHandlerMethods(DynamicController.class);
+
+//        Method[] methods = DynamicController.class.getMethods();
+//        Method defaultMethod = null;
+//        for(Method method : methods){
+//            if(method.getName().equalsIgnoreCase("dynamicBind")){
+//                defaultMethod = method;
+//            }
+//        }
+//        RequestMappingHandlerHolder.me().registerMapping(requestMappingInfo,"dynamicController",defaultMethod);
 //        RequestMappingHandler.getInstance().setDetectHandlerMethodsInAncestorContexts(true);
 //        RequestMappingHandler.getInstance().afterPropertiesSet();
         model.addAttribute("msg", "Dynamic register["+ url +"] success!!! <br/> <a href=\"/"+ url +"\">Dynamic Test</a>");

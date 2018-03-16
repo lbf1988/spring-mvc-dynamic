@@ -4,6 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * SpringContextUtil
@@ -51,6 +52,17 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /**
+     * 获取Bean
+     * @param requiredType
+     * @param <T>
+     * @return
+     * @throws BeansException
+     */
+    public static <T> T getBean(Class<T> requiredType) throws BeansException{
+        return applicationContext.getBean(requiredType);
+    }
+
+    /**
      * 检查是否存在Bean
      * @param name
      * @return
@@ -81,5 +93,9 @@ public class SpringContextUtil implements ApplicationContextAware {
 
     public static String[] getAliases(String name) throws NoSuchBeanDefinitionException {
         return applicationContext.getAliases(name);
+    }
+
+    public static ConfigurableApplicationContext getConfigurableApplicationContext(){
+        return (ConfigurableApplicationContext) getApplicationContext();
     }
 }

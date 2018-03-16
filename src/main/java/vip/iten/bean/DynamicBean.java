@@ -3,6 +3,7 @@ package vip.iten.bean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import vip.iten.annotation.Param;
 import vip.iten.annotation.Test;
@@ -21,6 +22,7 @@ public class DynamicBean implements Serializable{
 
     @Autowired
     private UserService userService;
+
 
     public String dynamicBind(String name, ModelMap model){
         System.out.println("dynamic param[name] -----> " + userService.toAction("----------------*******"));
